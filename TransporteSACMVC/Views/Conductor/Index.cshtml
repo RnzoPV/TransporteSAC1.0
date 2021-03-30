@@ -1,0 +1,51 @@
+﻿@model IEnumerable<TransporteSACMVC.Models.ConductorModel>
+
+@{
+    ViewBag.Title = "Lista de conductores";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "createConductor")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ape_pat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ape_mat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ape_pat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ape_mat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefono)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "updateConductor", new { id=item.Id }) |
+            @Html.ActionLink("Details", "detailConductor", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "deleteConductor", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
