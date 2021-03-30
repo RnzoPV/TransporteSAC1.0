@@ -20,72 +20,136 @@ namespace TransporteSACMVC.Controllers
 
         // GET: Conductor
         public ActionResult Index()
-        { 
-            return View(conductorService.getAllConductor());
+        {
+            try
+            {
+                return View(conductorService.getAllConductor());
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception( e.ToString());
+            }
+           
         }
         public ActionResult createConductor()
         {
-            return View(new ConductorModel());
+            try
+            {
+                return View(new ConductorModel());
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.ToString());
+            }
+            
         }
         [HttpPost]
         public ActionResult createConductor(ConductorModel conductor)
         {
-            if(ModelState.IsValid){
-                using (TransporteSACDBEntities db = new TransporteSACDBEntities())
+            try
+            {
+                if (ModelState.IsValid)
                 {
-                    db.Conductor.Add(Converter.model2enity(conductor));
-                    db.SaveChanges();
+                    using (TransporteSACDBEntities db = new TransporteSACDBEntities())
+                    {
+                        db.Conductor.Add(Converter.model2enity(conductor));
+                        db.SaveChanges();
+                    }
+                    return RedirectToAction("Index");
                 }
-                return RedirectToAction("Index");
+                return View(conductor);
             }
-            return View(conductor); 
+            catch (Exception e)
+            {
+                
+                throw new Exception(e.ToString());
+            }
+
         }
         public ActionResult updateConductor(int id)
         {
-
-            Conductor conductorE;
-            using (TransporteSACDBEntities db = new TransporteSACDBEntities())
+            try
             {
-                 conductorE = db.Conductor.Find(id);
+                Conductor conductorE;
+                using (TransporteSACDBEntities db = new TransporteSACDBEntities())
+                {
+                    conductorE = db.Conductor.Find(id);
+                }
+                ConductorModel conductorM = Converter.entity2model(conductorE);
+                return View(conductorM);
             }
-            ConductorModel conductorM = Converter.entity2model(conductorE);
-            return View(conductorM);
+            catch (Exception e)
+            {
+
+                throw new Exception(e.ToString());
+            }
+
 
         }
         [HttpPost]
         public ActionResult updateConductor(ConductorModel conductorModel)
         {
-        if (ModelState.IsValid)
-        {
-            Conductor conductorE = Converter.model2enity(conductorModel);
-            using (TransporteSACDBEntities db = new TransporteSACDBEntities()) {
-                db.Entry(conductorE).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Conductor conductorE = Converter.model2enity(conductorModel);
+                    using (TransporteSACDBEntities db = new TransporteSACDBEntities())
+                    {
+                        db.Entry(conductorE).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    return RedirectToAction("Index");
+                }
+                return View(conductorModel);
             }
-                return RedirectToAction("Index");
+            catch (Exception e)
+            {
+
+                throw new Exception(e.ToString());
             }
-            return View(conductorModel);
+       
         }
         [HttpGet]
         public ActionResult deleteConductor(int id)
         {
-            using (TransporteSACDBEntities db = new TransporteSACDBEntities())
+            try
             {
-                var conductor = db.Conductor.Find(id);
-                db.Entry(conductor).State = System.Data.Entity.EntityState.Deleted;
-                db.SaveChanges();
-            }
+                using (TransporteSACDBEntities db = new TransporteSACDBEntities())
+                {
+                    var conductor = db.Conductor.Find(id);
+                    db.Entry(conductor).State = System.Data.Entity.EntityState.Deleted;
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.ToString());
+            }
+           
         }
         public ActionResult detailConductor(int id)
         {
-            Conductor conductorE;
-            using (TransporteSACDBEntities db = new TransporteSACDBEntities())
+            try
             {
-                conductorE = db.Conductor.Find(id);
+                Conductor conductorE;
+                using (TransporteSACDBEntities db = new TransporteSACDBEntities())
+                {
+                    conductorE = db.Conductor.Find(id);
+                }
+                ConductorModel conductorM = Converter.entity2model(conductorE);
+                return View(conductorM);
             }
-            ConductorModel conductorM = Converter.entity2model(conductorE);
-            return View(conductorM);
+            catch (Exception e)
+            {
+
+                throw new Exception( e.ToString());
+            }
+
         }
     }
 }
