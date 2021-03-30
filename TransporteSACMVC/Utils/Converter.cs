@@ -6,7 +6,7 @@ using System.Web;
 using TransporteSACMVC.Entities;
 using TransporteSACMVC.Models;
 
-namespace TransporteSACMVC.Servicio
+namespace TransporteSACMVC.Utils
 {
     public static class Converter
     {

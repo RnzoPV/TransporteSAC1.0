@@ -6,40 +6,22 @@ using System.Web.Mvc;
 
 using TransporteSACMVC.Models;
 using TransporteSACMVC.Entities;
-using TransporteSACMVC.Servicio;
+using TransporteSACMVC.Utils;
+using TransporteSACMVC.Services;
+using TransporteSACMVC.Services.Impl;
 
 namespace TransporteSACMVC.Controllers
 {
     public class ConductorController : Controller
     {
 
-        IEnumerable<ConductorModel> getAll()
-        {
-            List<Conductor> conductors;
-            List<ConductorModel> conductorModels = new List<ConductorModel>();
-            using (TransporteSACDBEntities db = new TransporteSACDBEntities())
-            {
-                conductors = db.Conductor.ToList();
-                /*conductors = (from c in db.Conductor select new ConductorModel{ 
-                    Id = c.id,
-                    Nombre = c.nombre,
-                    ape_pat = c.ape_pat,
-                    ape_mat = c.ape_mat,
-                    Telefono = c.telefono
-                }).ToList();*/
-            }
-            foreach (Conductor conductorE in conductors)
-            {
-                ConductorModel conductorM = Converter.entity2model(conductorE);
-                conductorModels.Add(conductorM);
-            }
-            return conductorModels;
-        }
+
+        ConductorServiceImpl conductorService = new ConductorServiceImpl();
 
         // GET: Conductor
         public ActionResult Index()
         { 
-            return View(getAll());
+            return View(conductorService.getAllConductor());
         }
         public ActionResult createConductor()
         {

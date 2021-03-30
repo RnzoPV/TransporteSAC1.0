@@ -152,6 +152,8 @@
     </Compile>
     <Compile Include="Models\ConductorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IConductorService.cs" />
+    <Compile Include="Services\Impl\ConductorServiceImpl.cs" />
     <Compile Include="Utils\Converter.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +161,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="DB\TransporteSACDB.sql" />
     <Content Include="Entities\TransporteEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TransporteEntity.Context.cs</LastGenOutput>
